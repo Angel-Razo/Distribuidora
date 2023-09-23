@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Producto.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Galaxy.NewtonSoftJson" Version="1.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
   </ItemGroup>

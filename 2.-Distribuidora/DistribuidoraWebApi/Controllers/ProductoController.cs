@@ -15,7 +15,7 @@ namespace DistribuidoraWebApi.Controllers
             _producto = productoRepositorio;
         }
 
-        [HttpGet]
+        [HttpGet("Obtener")]
         public Task<List<Producto>> get()
         {
             return _producto.OptenerProducto();

@@ -1,4 +1,7 @@
-﻿@{
+﻿@using DistribuidoraEntidades;
+@model List<Producto>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -11,6 +14,39 @@
         @ViewBag.Accion
     </div>
     <div class="card_body">
-        <a asp-action="Producto">Nuevo Producto</a>
+        <a asp-action="Producto" asp-controller="Home" asp-route-IdProducto="0">Nuevo Producto</a>
+        <hr />
+
+        <table class="table">
+               <thead>
+                   <tr>
+                       <th>IdProducto</th>
+                       <th>IdProveedor</th>
+                       <th>IdTipoProducto</th>
+                       <th>Name</th>
+                       <th>Clave</th>
+                       <th>Precio</th>
+                       <th>Editar</th>
+                   </tr>
+               </thead>
+               <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <td>@item.IdProducto</td>
+                        <td>@item.IdProveedor</td>
+                        <td>@item.IdTipoProducto</td>
+                        <td>@item.Nombre</td>
+                        <td>@item.Clave</td>
+                        <td>@item.Precio</td>
+                        <td>
+                            <a asp-action="Eliminar" asp-controller="Home" class="btn-danger" asp-route-IdProducto="@item.IdProducto">Eliminar</a>
+
+                        </td>
+                    </tr>
+                    
+                }
+            </tbody>
+        </table>
     </div>
 </div>

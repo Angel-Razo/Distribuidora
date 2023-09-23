@@ -23,7 +23,7 @@ namespace DistribuidoraWebApp.Serivicios
             var cliente = new HttpClient();
 
             cliente.BaseAddress = new Uri(_distribuidoraWebApi);
-            var response = await cliente.GetAsync("api/Producto");
+            var response = await cliente.GetAsync("Producto/Obtener");
 
             if (response.IsSuccessStatusCode)
             {

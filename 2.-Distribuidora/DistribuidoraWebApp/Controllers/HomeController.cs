@@ -26,10 +26,14 @@ namespace DistribuidoraWebApp.Controllers
 
         public async Task<IActionResult> producto(int idProducto)
         {
+            Producto producto=new Producto();
 
-            Producto producto = await _servicio_Api.obtenerProductosById(idProducto);
+            if (idProducto > 0)
+            {
+                producto = await _servicio_Api.obtenerProductosById(idProducto);
 
-            ViewBag.Accion = "Nuevo Producto";
+                ViewBag.Accion = "Nuevo Producto";
+            }
 
             return View(producto);
         }

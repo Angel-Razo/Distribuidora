@@ -80,7 +80,7 @@ namespace DistribuidoraWebApp.Serivicios
             var cliente = new HttpClient();
 
             cliente.BaseAddress = new Uri(_distribuidoraWebApi);
-            var response = await cliente.GetAsync($"api/Producto{IdProducto}");
+            var response = await cliente.GetAsync($"Producto/{IdProducto}");
 
             if (response.IsSuccessStatusCode)
             {

@@ -1,0 +1,47 @@
+﻿@using DistribuidoraEntidades;
+@model Producto
+
+@{
+    ViewData["Title"] = "producto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>producto</h1>
+
+<div class="text-center">
+    <h1 class="display-4">Distribuidora</h1>
+    @ViewBag.Accion
+</div>
+<div class="card">
+
+    <div class="card-body">
+        <form asp-action="guardarProducto" asp-controller="Home" method="post">
+        <hr />
+
+            <input asp-for="IdProducto" />
+
+            <div class="mb-2">
+                <label class="form-label">Clave</label>
+                <input type="text" class="form-control form-control-sm" asp-for="Clave" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Precio</label>
+                <input type="text" class="form-control form-control-sm" asp-for="Precio" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Proveedor</label>
+                <input type="text" class="form-control form-control-sm" asp-for="IdProveedor" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">TipoProducto</label>
+                <input type="text" class="form-control form-control-sm" asp-for="IdTipoProducto" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Nombre</label>
+                <input type="text" class="form-control form-control-sm" asp-for="Nombre" />
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a asp-action="Index" class="btn btn btn-warning btn-sm" asp-controller="Home">Regresar</a>
+        </form>
+    </div>
+</div>

@@ -31,5 +31,10 @@ namespace DistribuidoraWebApi.Controllers
         {
             return _producto.eliminarProducto(idProducto);
         }
+        [HttpGet("{idProducto:int}")]
+        public Task<Producto> getById(int idProducto)
+        {
+            return _producto.OptenerProductoById(idProducto);
+        }
     }
 }

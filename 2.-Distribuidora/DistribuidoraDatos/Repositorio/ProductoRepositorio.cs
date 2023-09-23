@@ -19,6 +19,32 @@ namespace DistribuidoraDatos.Repositorio
         {
             _configuracionConexion = configuracion.Value;
         }
+
+        public async Task<bool> crearProducto(Producto producto)
+        {
+            try
+            {
+                using (var conexion = new SqlConnection(_configuracionConexion.CadenaConexion))
+                {
+                    conexion.Open();
+                    SqlCommand cmd = new SqlCommand("dbo.Usp_Producto_Ins", conexion);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("Nombre", producto.Nombre);
+                    cmd.Parameters.AddWithValue("Clave", producto.Clave);
+                    cmd.Parameters.AddWithValue("IdProveedor", producto.IdProveedor);
+                    cmd.Parameters.AddWithValue("IdTipoProducto", producto.IdTipoProducto);
+                    cmd.Parameters.AddWithValue("Precio", producto.Precio);
+
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public async Task<List<Producto>> OptenerProducto()
         {
             List<Producto> producto = new List<Producto>();

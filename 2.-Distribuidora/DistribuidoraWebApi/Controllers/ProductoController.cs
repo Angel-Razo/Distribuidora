@@ -20,5 +20,10 @@ namespace DistribuidoraWebApi.Controllers
         {
             return _producto.OptenerProducto();
         }
+        [HttpPost]
+        public Task<bool> post([FromBody]Producto producto)
+        {
+            return _producto.crearProducto(producto);
+        }
     }
 }

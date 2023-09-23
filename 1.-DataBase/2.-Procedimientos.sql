@@ -1,6 +1,7 @@
 use distribuidora
 go
 
+/*-------------------------------------------------------------*/
 
 IF OBJECT_ID('dbo.Usp_Proveedor_Obt') IS NOT NULL
 DROP PROCEDURE dbo.Usp_Proveedor_Obt
@@ -42,11 +43,11 @@ go
 
 /*-------------------------------------------------------------*/
 
-IF OBJECT_ID('dbo.Usp_Productos_Ins') IS NOT NULL
-DROP PROCEDURE dbo.Usp_Productos_Ins
+IF OBJECT_ID('dbo.Usp_Producto_Ins') IS NOT NULL
+DROP PROCEDURE dbo.Usp_Producto_Ins
 GO
 
-Create procedure dbo.Usp_Productos_Ins
+Create procedure dbo.Usp_Producto_Ins
   @Clave			nvarchar(50)
   , @Nombre		    nvarchar(100) 
   , @Precio			decimal 
@@ -55,7 +56,7 @@ Create procedure dbo.Usp_Productos_Ins
   
 as
 /*
-exec Usp_Productos_Ins
+exec Usp_Producto_Ins
 @Clave	='pinol01'
 , @Nombre='Pinol 360ml'
 , @Precio	=35
@@ -86,6 +87,8 @@ begin try
 	,@IdTipoProducto
 	)
 
+	SELECT  @@IDENTITY as [IdProducto]
+
 	commit tran
 end try
 begin catch
@@ -94,3 +97,29 @@ begin catch
 end catch
 
 go
+
+/*-------------------------------------------------------------*/
+
+IF OBJECT_ID('dbo.Usp_Productor_Obt') IS NOT NULL
+DROP PROCEDURE dbo.Usp_Productor_Obt
+GO
+
+Create procedure dbo.Usp_Productor_Obt
+as
+/*
+exec dbo.Usp_Productor_Obt
+*/
+
+Select
+  [IdProducto]=Prod.IdProducto
+  , [IdProveedor]=Prod.IdProveedor
+  , [IdTipoProducto]=Prod.IdTipoProducto
+  , [Nombre]=Prod.Nombre
+  , [Clave]=Prod.clave
+  , [EsActivo]=Prod.EsActivo
+  , [Precio]=Prod.Precio
+from
+  dbo.Tb_Productor Prod
+
+go
+

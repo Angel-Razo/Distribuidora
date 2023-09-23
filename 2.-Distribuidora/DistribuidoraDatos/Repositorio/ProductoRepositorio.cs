@@ -45,13 +45,34 @@ namespace DistribuidoraDatos.Repositorio
             }
         }
 
+        public async Task<bool> eliminarProducto(int idProducto)
+        {
+            try
+            {
+                using (var conexion = new SqlConnection(_configuracionConexion.CadenaConexion))
+                {
+                    conexion.Open();
+                    SqlCommand cmd = new SqlCommand("dbo.Usp_Producto_Del", conexion);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("IdProducto", idProducto);
+
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public async Task<List<Producto>> OptenerProducto()
         {
             List<Producto> producto = new List<Producto>();
             using(var conexion=new SqlConnection(_configuracionConexion.CadenaConexion))
             {
                 conexion.Open();
-                SqlCommand cmd = new SqlCommand("dbo.Usp_Productor_Obt", conexion);
+                SqlCommand cmd = new SqlCommand("dbo.Usp_Producto_Obt", conexion);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 using(var read=await cmd.ExecuteReaderAsync())

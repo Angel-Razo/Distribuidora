@@ -43,7 +43,7 @@ namespace DistribuidoraWebApp.Serivicios
 
             var content=new StringContent (JsonConvert.SerializeObject(producto), Encoding.UTF8, "application/json");
 
-            var response = await cliente.PostAsync("api/Producto",content);
+            var response = await cliente.PostAsync("Producto",content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -58,7 +58,7 @@ namespace DistribuidoraWebApp.Serivicios
             var cliente = new HttpClient();
 
             cliente.BaseAddress = new Uri(_distribuidoraWebApi);
-            var response = await cliente.DeleteAsync($"api/Producto{producto}");
+            var response = await cliente.DeleteAsync($"Producto/{producto}");
 
             if (response.IsSuccessStatusCode)
             {

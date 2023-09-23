@@ -25,5 +25,11 @@ namespace DistribuidoraWebApi.Controllers
         {
             return _producto.crearProducto(producto);
         }
+
+        [HttpDelete("{idProducto:int}")]
+        public Task<bool> delete(int idProducto)
+        {
+            return _producto.eliminarProducto(idProducto);
+        }
     }
 }

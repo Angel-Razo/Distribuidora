@@ -13,6 +13,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.Configure<ConfiguracionConexion>(builder.Configuration.GetSection("ConnectionStrings"));
 builder.Services.AddScoped<IProductoRepositorio, ProductoRepositorio>();
+builder.Services.AddScoped<ITipoProductoRepositorio, TipoProductoRepositorio>();
+builder.Services.AddScoped<IProveedorRepositorio,ProveedorRepositorio>();
 
 var app = builder.Build();
 

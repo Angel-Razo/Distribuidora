@@ -6,7 +6,7 @@ Use Distribuidora
 go 
 
 if object_id('FK_Proveedor') is not null
-	ALTER TABLE dbo.Tb_Productor
+	ALTER TABLE dbo.Tb_Producto
 	DROP CONSTRAINT FK_Proveedor;
 GO
 go
@@ -38,11 +38,11 @@ create table Tb_Proveedor(
   , Descripcion nvarchar(150)
 )
 
-if object_id('Tb_Productor') is not null
-  drop table Tb_Productor
+if object_id('Tb_Producto') is not null
+  drop table Tb_Producto
 go
 
-create table Tb_Productor(
+create table Tb_Producto(
 IdProducto int Identity(1,1) primary key
 , clave nvarchar(150) not null
 , Nombre nvarchar(150) not null

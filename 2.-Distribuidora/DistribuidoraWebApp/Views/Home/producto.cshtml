@@ -31,6 +31,9 @@
             <div class="mb-2">
                 <label class="form-label">Proveedor</label>
                 <input type="text" class="form-control form-control-sm" asp-for="IdProveedor" />
+                <select id="cboProveedor">
+                    <option value="">Seleccione uno...</option>
+                </select>
             </div>
             <div class="mb-2">
                 <label class="form-label">TipoProducto</label>
@@ -45,3 +48,30 @@
         </form>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+           // type: "POST",
+            url: '@Url.Action("obtenerProveedores", "Home")',
+            //data: "{}",
+            contentType: 'application/json',
+            //dataType: "json",
+            success: function (msg) {
+                var datos = $.parseJSON(msg.d);
+
+                $(datos).each(function () {
+                    var option = $(document.createElement('option'));
+
+                    option.text(this.Nombre);
+                    option.val(this.IdProveedor);
+
+                    $("#cboEjemplo").append(option);
+                });
+            },
+            error: function (msg) {
+                $("#dvAlerta > span").text("Error al llenar el combo");
+            }
+        });
+    });
+</script>

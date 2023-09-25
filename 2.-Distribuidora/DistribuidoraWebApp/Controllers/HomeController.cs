@@ -23,6 +23,14 @@ namespace DistribuidoraWebApp.Controllers
 
             return View(productos);
         }
+        public async Task<List<Proveedor>> obtenerProveedores()
+        {
+
+            List<Proveedor> response = await _servicio_Api.obtenerProveedor();
+
+
+            return response;
+        }
 
         public async Task<IActionResult> producto(int idProducto)
         {
@@ -37,10 +45,27 @@ namespace DistribuidoraWebApp.Controllers
 
             return View(producto);
         }
+
+
         public async Task<IActionResult> guardarProducto(Producto producto)
         {
 
             bool respose = await _servicio_Api.guardarProducto(producto);
+
+            if (respose)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return NoContent();
+            }
+        }
+
+        public async Task<IActionResult> guardarProveedor(Proveedor proveedor)
+        {
+
+            bool respose = await _servicio_Api.guardarProveedor(proveedor);
 
             if (respose)
             {

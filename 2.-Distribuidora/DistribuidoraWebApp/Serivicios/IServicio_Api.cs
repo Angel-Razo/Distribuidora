@@ -9,6 +9,8 @@ namespace DistribuidoraWebApp.Serivicios
         Task<bool> actualizarProducto(Producto producto);
         Task<bool> eliminarProducto(int producto);
         Task<Producto> obtenerProductosById(int IdProducto);
+        Task<List<Proveedor>> obtenerProveedor();
+        Task<bool> guardarProveedor(Proveedor proveedor);
 
     }
 }

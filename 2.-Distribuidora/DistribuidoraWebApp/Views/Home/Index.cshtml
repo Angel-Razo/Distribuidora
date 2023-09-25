@@ -1,9 +1,12 @@
 ﻿@using DistribuidoraEntidades;
 @model List<Producto>
-
 @{
     ViewData["Title"] = "Home Page";
 }
+
+
+
+
 
 <div class="text-center">
     <h1 class="display-4">Distribuidora</h1>
@@ -13,6 +16,8 @@
 
     <div class="card-body">
         <a asp-action="Producto" class="btn btn-primary btn-sm" asp-controller="Home" asp-route-IdProducto="0">Nuevo Producto</a>
+
+        <button type="submit" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalProveedor">Nuevo Proveedor</button>
         <hr />
 
         <table class="table">
@@ -48,3 +53,53 @@
         </table>
     </div>
 </div>
+
+<div class="modal fade" id="ModalProveedor" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Nuevo Proveedor</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="guardarProveedor" asp-controller="Home" method="post">
+                    <hr />
+                    <div class="mb-2">
+                        <label class="form-label">Nombre</label>
+                        <input id="txtNombreProveedor" type="text" class="form-control form-control-sm"  />
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Descripcion</label>
+                        <input id="txtDescripcionProveedor" type="text" class="form-control form-control-sm"  />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="GuardarProveedor();">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script>
+        function GuardarProveedor() {
+
+        var Data = {IdProveedor:0, Nombre: "1", Descripcion: "531" };
+
+        $.ajax(
+            {
+                url: '@Url.Action("guardarProveedor", "Home")',
+                data: { IdProveedor: 0, Nombre: $("#txtNombreProveedor").val(), Descripcion: $("#txtDescripcionProveedor").val() },
+               // type: 'POST',
+                contentType: 'application/json',
+                success: function (data) {
+                    alert('Proveedor creado con exito');
+                    $('#ModalProveedor').modal('hide');
+                },
+            });
+
+        }
+    </script>
+

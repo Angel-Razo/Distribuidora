@@ -14,13 +14,55 @@ exec dbo.Usp_Proveedor_Obt
 */
 
 Select
-  [IdPro]=Pro.IdProveedor
+  [IdProveedor]=Pro.IdProveedor
   , [Nombre]=Pro.Nombre
   , [Descripcion]=Pro.Descripcion
 from
   dbo.Tb_Proveedor Pro
 
 go
+
+/*-------------------------------------------------------------*/
+
+IF OBJECT_ID('dbo.Usp_Proveedor_Ins') IS NOT NULL
+DROP PROCEDURE dbo.Usp_Proveedor_Ins
+GO
+
+Create procedure dbo.Usp_Proveedor_Ins
+@Nombre nvarchar(50)
+, @Descripcion nvarchar(150)
+as
+/*
+exec dbo.Usp_Proveedor_Ins
+@nombre='Juan'
+,@Descripcion='Juan arquimides'
+*/
+begin try
+	begin tran
+	insert into  
+	  dbo.Tb_Proveedor
+	  (
+		Nombre
+		,  Descripcion
+		)
+	  Values
+	  (
+	  @Nombre
+	  , @Descripcion
+	  )
+
+	SELECT  @@IDENTITY as [IdProducto]
+
+	commit tran
+end try
+begin catch
+	rollback tran
+	select 0
+end catch
+
+
+go
+/*-------------------------------------------------------------*/
 
 IF OBJECT_ID('dbo.Usp_TipoProducto_Obt') IS NOT NULL
 DROP PROCEDURE dbo.Usp_TipoProducto_Obt
@@ -33,7 +75,7 @@ exec dbo.Usp_TipoProducto_Obt
 */
 
 Select
-  [IdPro]=Tp.IdTipoProducto
+  [IdTipoProducto]=Tp.IdTipoProducto
   , [Nombre]=Tp.Nombre
   , [Descripcion]=Tp.Descripcion
 from

@@ -19,4 +19,8 @@
     <ProjectReference Include="..\DistribuidoraEntidades\DistribuidoraEntidades.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Js\" />
+  </ItemGroup>
+
 </Project>

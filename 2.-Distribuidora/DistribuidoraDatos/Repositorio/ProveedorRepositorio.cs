@@ -45,5 +45,31 @@ namespace DistribuidoraDatos.Repositorio
 
             return producto;
         }
+
+        public async Task<bool> crearProveedor(Proveedor proveedor)
+        {
+            try
+            {
+                using (var conexion = new SqlConnection(_configuracionConexion.CadenaConexion))
+                {
+                    conexion.Open();
+                    SqlCommand cmd = new SqlCommand("dbo.Usp_Proveedor_Ins", conexion);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue(nameof(Proveedor.Nombre), proveedor.Nombre);
+                    cmd.Parameters.AddWithValue(nameof(Proveedor.Descripcion), proveedor.Descripcion);
+
+                    cmd.ExecuteNonQuery();
+                    return true;
+
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+           
+        }
     }
 }

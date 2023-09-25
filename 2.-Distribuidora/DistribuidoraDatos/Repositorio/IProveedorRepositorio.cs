@@ -10,5 +10,7 @@ namespace DistribuidoraDatos.Repositorio
     public interface IProveedorRepositorio
     {
         Task<List<Proveedor>> OptenerProveedor();
+
+        Task<bool> crearProveedor(Proveedor proveedor);
     }
 }

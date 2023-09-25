@@ -92,6 +92,41 @@ namespace DistribuidoraWebApp.Serivicios
 
         }
 
+        public async Task<List<Proveedor>> obtenerProveedor()
+        {
+            List<Proveedor> result = new List<Proveedor>();
 
+            var cliente = new HttpClient();
+
+            cliente.BaseAddress = new Uri(_distribuidoraWebApi);
+            var response = await cliente.GetAsync("Provedor/Obtener");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonresponse = await response.Content.ReadAsStringAsync();
+                var resulttmp = JsonConvert.DeserializeObject<List<Proveedor>>(jsonresponse);
+                result = resulttmp;
+            }
+            return result;
+        }
+
+        public async Task<bool> guardarProveedor(Proveedor proveedor)
+        {
+            bool respose = false;
+
+            var cliente = new HttpClient();
+
+            cliente.BaseAddress = new Uri(_distribuidoraWebApi);
+
+            var content = new StringContent(JsonConvert.SerializeObject(proveedor), Encoding.UTF8, "application/json");
+
+            var response = await cliente.PostAsync("Proveedor", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                respose = true;
+            }
+            return respose;
+        }
     }
 }

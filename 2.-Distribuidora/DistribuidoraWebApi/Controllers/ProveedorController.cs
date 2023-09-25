@@ -20,5 +20,11 @@ namespace DistribuidoraWebApi.Controllers
         {
             return _proveedor.OptenerProveedor();
         }
+
+        [HttpPost]
+        public Task<bool> post(Proveedor proveedor)
+        {
+            return _proveedor.crearProveedor(proveedor);
+        }
     }
 }

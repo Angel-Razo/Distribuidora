@@ -20,6 +20,11 @@ namespace DistribuidoraWebApi.Controllers
         {
             return _producto.OptenerProducto();
         }
+        [HttpGet("Filter/{clave}/{nombre}")]
+        public Task<List<Producto>> getFilter(string clave, string nombre)
+        {
+            return _producto.OptenerProductoFiltro(clave,nombre);
+        }
         [HttpPost]
         public Task<bool> post([FromBody]Producto producto)
         {

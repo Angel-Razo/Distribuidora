@@ -10,6 +10,7 @@ namespace DistribuidoraDatos.Repositorio
     public interface IProductoRepositorio
     {
         Task<List<Producto>> OptenerProducto();
+        Task<List<Producto>> OptenerProductoFiltro(string clave, string nombre);
         Task<Producto> OptenerProductoById(int idProducto);
         Task<bool> eliminarProducto(int idProducto);
         Task<bool> crearProducto(Producto producto);

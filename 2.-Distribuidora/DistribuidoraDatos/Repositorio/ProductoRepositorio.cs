@@ -98,6 +98,38 @@ namespace DistribuidoraDatos.Repositorio
             return producto;
         }
 
+        public async Task<List<Producto>> OptenerProductoFiltro(string clave, string nombre)
+        {
+            List<Producto> producto = new List<Producto>();
+            using (var conexion = new SqlConnection(_configuracionConexion.CadenaConexion))
+            {
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("dbo.Usp_Producto_ObtFiltro", conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("Clave", clave);
+                cmd.Parameters.AddWithValue("Nombre", nombre);
+                using (var read = await cmd.ExecuteReaderAsync())
+                {
+                    while (await read.ReadAsync())
+                    {
+                        Producto prod = new Producto();
+                        prod.IdProducto = (int)read["IdProducto"];
+                        prod.IdProveedor = (int)read["IdProveedor"];
+                        prod.IdTipoProducto = (int)read["IdTipoProducto"];
+                        prod.Nombre = read.GetString("Nombre");
+                        prod.Clave = read.GetString("Clave");
+                        prod.EsActivo = (bool)read["EsActivo"];
+                        prod.Precio = (decimal)read["Precio"];
+
+                        producto.Add(prod);
+
+                    }
+                }
+
+            }
+
+            return producto;
+        }
 
         public async Task<Producto> OptenerProductoById( int idProducto)
         {

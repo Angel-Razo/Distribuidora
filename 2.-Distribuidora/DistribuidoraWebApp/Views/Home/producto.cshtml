@@ -18,7 +18,7 @@
         <form asp-action="guardarProducto" asp-controller="Home" method="post">
         <hr />
 
-            <input asp-for="IdProducto" />
+            <input asp-for="IdProducto"  type="hidden"/>
 
             <div class="mb-2">
                 <label class="form-label">Clave</label>
@@ -30,10 +30,7 @@
             </div>
             <div class="mb-2">
                 <label class="form-label">Proveedor</label>
-                <input type="text" class="form-control form-control-sm" asp-for="IdProveedor" />
-                <select id="cboProveedor">
-                    <option value="">Seleccione uno...</option>
-                </select>
+
             </div>
             <div class="mb-2">
                 <label class="form-label">TipoProducto</label>

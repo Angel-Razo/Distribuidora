@@ -167,6 +167,54 @@ go
 
 /*-------------------------------------------------------------*/
 
+IF OBJECT_ID('dbo.Usp_Producto_ObtFiltro') IS NOT NULL
+DROP PROCEDURE dbo.Usp_Producto_ObtFiltro
+GO
+
+Create procedure dbo.Usp_Producto_ObtFiltro
+@Clave nvarchar(50)
+, @Nombre nvarchar(150)
+as
+/*
+exec dbo.Usp_Producto_ObtFiltro
+*/
+
+if (@clave!=null)
+  begin
+	Select
+	  [IdProducto]=Prod.IdProducto
+	  , [IdProveedor]=Prod.IdProveedor
+	  , [IdTipoProducto]=Prod.IdTipoProducto
+	  , [Nombre]=Prod.Nombre
+	  , [Clave]=Prod.clave
+	  , [EsActivo]=Prod.EsActivo
+	  , [Precio]=Prod.Precio
+	from
+	  dbo.Tb_Producto Prod 
+	where
+	  Prod.clave=@Clave
+  end
+
+if (@Nombre!=null)
+  begin
+	Select
+	  [IdProducto]=Prod.IdProducto
+	  , [IdProveedor]=Prod.IdProveedor
+	  , [IdTipoProducto]=Prod.IdTipoProducto
+	  , [Nombre]=Prod.Nombre
+	  , [Clave]=Prod.clave
+	  , [EsActivo]=Prod.EsActivo
+	  , [Precio]=Prod.Precio
+	from
+	  dbo.Tb_Producto Prod 
+	where
+	  Prod.Nombre=@Nombre
+  end
+
+go
+
+/*-------------------------------------------------------------*/
+
 IF OBJECT_ID('dbo.Usp_Producto_ObtById') IS NOT NULL
 DROP PROCEDURE dbo.Usp_Producto_ObtById
 GO
